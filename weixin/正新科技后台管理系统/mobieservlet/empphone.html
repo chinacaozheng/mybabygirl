@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+			 <link rel="stylesheet" href="css/jquery.mobile-1.3.2.min.css" />
+    <script type="text/javascript" src="js/jquery-1.8.3.min.js" ></script>
+    <script type="text/javascript" src="js/jquery.mobile-1.3.2.min.js" ></script>
+	<body>
+			<!-- 页面开始 -->
+<div id="page1" data-role="page" >
+	
+	<script  type="text/javascript">
+		var  htmldatas="";
+		$.ajax({
+			
+			type:"post",
+			url:"http://192.168.43.61:8090/mobilepcserver/emps",
+			data:{"operator":"queryphone"},
+			dataType:'xml',
+			async:true,
+			success:function(datas)
+			{
+				console.log(datas);
+				parsexml(datas);
+			}
+			
+		})
+		function  parsexml(datas)
+		{
+			$(datas).find("phone").each(function(index){
+				
+				var  name=$(this).children("name").text();
+				var  phone=$(this).children("telphone").text();
+				var call="tel:"+phone;
+				htmldatas+="<li><a href='"+call+"'>"+name+":"+phone+"</a></li>";
+			});
+			
+			$("#phonelists").html(htmldatas);
+			
+			$("#phonelists").listview("refresh");
+		}
+		
+	</script>
+		<!-- 头部开始 -->
+    <div data-role="header" data-theme="b" data-position="fixed">
+        <h3>智码堂功能列表</h3>
+    </div>
+<!-- 头部结束 -->
+    <div data-role="content"  id="pagecontent">
+    	
+    	
+    	<ul data-role="listview"  id="phonelists">
+
+        </ul>
+
+
+    </div>
+<!-- 底部开始 -->
+    <div data-role="footer" data-theme="b" data-position="fixed">
+        <h3>智芯大厦7楼智码堂实训技术中心</h3>
+    </div>
+<!-- 底部结束 -->
+</div>
+	</body>
+</html>

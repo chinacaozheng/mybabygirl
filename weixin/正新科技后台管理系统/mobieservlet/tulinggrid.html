@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		  <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+		<title></title>
+		
+		<link rel="stylesheet" href="css/jquery.mobile-1.3.2.min.css" />
+		<script type="text/javascript" src="js/jquery-1.8.3.min.js"></script>
+		<script type="text/javascript" src="js/jquery.mobile-1.3.2.min.js"></script>
+	  <style type="text/css">
+	  #divcontent{
+	  	
+	    width: 100%;
+	  	height: 80vh;
+	  	display: flex;
+	  	flex-wrap: wrap;
+	  	align-items: center;
+	  	justify-content: center;
+	  	
+	  }
+	  .cell{
+	  	
+	  	display: flex;
+	  	flex-direction: column;
+	  	  	align-items: center;
+	  	justify-content: center;
+	  	text-align: center;
+	  }
+	  
+
+   
+  
+  
+	
+	  </style>
+	</head>
+
+	<body>
+		<div data-role="page" id="pageone">
+			<script  type="text/javascript">
+				
+				var  htmldatas="";
+				$.post("http://192.168.43.61:8090/mobilepcserver/menus",{"operator":"querygridmenu"},function(datas){
+					
+					console.log(datas);
+				
+						htmldatas+="<div class='ui-grid-b'>";
+					    $.each(datas,function(index,element){
+						
+				          htmldatas+="<div class='ui-block-b'><div class='cell'><a  href='"+element.viewpath+"'><img src='"+element.gimg+"' width='80%' /></a></div></div>";
+				          
+				
+						
+					    });
+					    htmldatas+="</div>";
+				
+					
+				
+					
+					
+					$("#gridmenu").html(htmldatas);
+					
+					$("#pageone").trigger("create");
+					
+					
+				},"json");
+				
+			</script>
+			<div data-role="header" data-theme='b' data-position="fixed">
+				<h1>天汇智码</h1>
+			</div>
+
+			<div id="divcontent" data-role="content">
+				<div  id="gridmenu">
+					
+					
+				</div>
+				
+				
+				<!--<div class="ui-grid-b">
+					<div class="ui-block-b"><img src="img/a1.jpg" width="80%" /></div>
+					<div class="ui-block-b"><img src="img/a2.jpg" width="80%" /></div>
+					<div class="ui-block-b"><img src="img/a3.jpg" width="80%" /></div>
+				</div>
+				<div class="ui-grid-b">
+					<div class="ui-block-b"><img src="img/a4.jpg" width="80%" /></div>
+					<div class="ui-block-b"><img src="img/a5.jpg" width="80%" /></div>
+					<div class="ui-block-b"><img src="img/a6.jpg" width="80%" /></div>
+				</div>
+				<div class="ui-grid-b">
+					<div class="ui-block-b"><img src="img/a7.jpg" width="80%" /></div>
+					<div class="ui-block-b"><img src="img/a8.jpg" width="80%" /></div>
+					<div class="ui-block-b"><img src="img/a9.jpg" width="80%" /></div>
+				</div>-->
+
+			</div>
+
+			<div data-role="footer" data-theme='b' data-position="fixed">
+				<h1>智码堂软件科技公司</h1>
+
+			</div>
+		</div>
+	</body>
+
+</html>

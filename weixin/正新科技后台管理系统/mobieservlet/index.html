@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title></title>
+    <link rel="stylesheet" href="css/jquery.mobile-1.3.2.min.css" />
+    <script type="text/javascript" src="js/jquery-1.8.3.min.js" ></script>
+    <script type="text/javascript" src="js/jquery.mobile-1.3.2.min.js" ></script>
+</head>
+<body>
+	<!-- 页面开始 -->
+<div id="page1" data-role="page" >
+	<script  type="text/javascript">
+	
+	$.ajax({
+		type:"post",
+		url:"http://192.168.43.61:8090/mobilepcserver/menus",
+		data:{"operator":"listmenu"},
+		async:true,
+		dataType:'json',
+		success:function(datas)
+		{
+			//alert(datas);
+			//console.log(datas);
+			parsedatas(datas);
+			
+		}
+		
+		
+	});
+	
+	function   parsedatas(datas)
+	{
+		
+		var  htmldatas="";
+		
+		$.each(datas,function(index,element){
+			
+			console.log(element.fname);
+			htmldatas+="<div data-role='collapsible' data-mini='true'>";
+			htmldatas+="<h3>"+element.fname+"</h3>";
+			htmldatas+="<ul data-role='listview'>"
+			
+			   $.each(element.clists, function(i,e) {
+				
+				       htmldatas+="<li><a data-transition='flip' href='"+e.mobileview+"'>"+e.cname+"</a></li>"
+				
+			    });
+			htmldatas+="</ul></div>";
+		});
+		
+		
+		
+		$("#pagecontent").html(htmldatas);
+		
+		
+		
+		$("#page1").trigger("create");
+		
+	}
+	
+</script>
+	
+<!-- 头部开始 -->
+    <div data-role="header" data-theme="b" data-position="fixed">
+        <h3>智码堂功能列表</h3>
+    </div>
+<!-- 头部结束 -->
+    <div data-role="content"  id="pagecontent">
+    	
+    	
+    	
+    	<!-- <div data-role="collapsible" data-mini="true">
+              <h4>学生信息</h4>
+              <ul data-role="listview">
+                <li><a href="#">查询学生</a></li>
+                <li><a href="#">增加学生</a></li>
+                <li><a href="#">维护学生</a></li>
+             </ul>
+          </div>
+       <div data-role="collapsible" data-mini="true">
+          <h4>学生信息</h4>
+          <ul data-role="listview">
+             <li><a href="#">查询学生</a></li>
+             <li><a href="#">增加学生</a></li>
+             <li><a href="#">维护学生</a></li>
+         </ul>
+   </div>-->
+
+    </div>
+<!-- 底部开始 -->
+    <div data-role="footer" data-theme="b" data-position="fixed">
+        <h3>智芯大厦7楼智码堂实训技术中心</h3>
+    </div>
+<!-- 底部结束 -->
+</div>
+</body>
+
+</html>

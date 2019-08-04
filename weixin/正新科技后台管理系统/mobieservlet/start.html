@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		 <link rel="stylesheet" href="css/jquery.mobile-1.3.2.min.css" />
+    <script type="text/javascript" src="js/jquery-1.8.3.min.js" ></script>
+    <script type="text/javascript" src="js/jquery.mobile-1.3.2.min.js" ></script>
+	<style  type="text/css">
+		.box{
+			
+			text-align: center;
+			/**border: 1px  solid  red;**/
+			white-space: nowrap;
+			overflow: hidden;
+		}
+		.movetext{
+			font-size: 16px;
+			font-weight: bold;
+			letter-spacing: 0.2rem;
+			animation: movet 3s steps(100,end) forwards;
+			
+		}
+		@keyframes movet{
+			from{width: 0;}
+			to{
+				width: 100%;
+			}
+		}
+		#imgdiv{
+			
+			width: 100%;
+			height: 400px;
+			/**border: 1px  solid  red;**/
+			display: flex;
+			justify-content: center;
+			align-items: center;
+		}
+		img{
+			margin: 10px;
+			border-radius: 20px;
+			animation: roateimg  3s linear forwards;
+		}
+		@keyframes roateimg{
+			from {
+				
+				transform: rotate(0deg);
+				}
+				to{
+				transform: rotate(360deg);
+				
+				}
+		}
+		
+	</style>
+	</head>
+	<body>
+		<!-- 页面开始 -->
+<div id="pagestart" data-role="page"b>
+    <div data-role="content">
+    	<h1 class="box movetext">全世界都会为你让路</h1>
+    </div>
+     <div id="imgdiv">
+     	 <img  src="img/thzmgzh.jpg" />
+     	
+     </div>
+    
+<!-- 底部开始 -->
+    <div data-role="footer" data-theme="b" data-position="fixed">
+        <h3>智码堂技术中心</h3>
+    </div>
+<!-- 底部结束 -->
+</div>
+	</body>
+	<script  type="text/javascript">
+		
+		setTimeout(function(){
+				$.mobile.changePage("index.html", {
+					  transition: "flip"
+					});
+		
+			
+		},6000);
+	
+	</script>
+</html>
